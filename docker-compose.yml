@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  cdek-service:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+      args:
+        - ALLOW_ORIGIN=${ALLOW_ORIGIN}
+      secrets:
+        - cdek_login
+        - cdek_pass
+    image: cdek-service:latest
+    container_name: cdek-service
+    ports:
+      - 9998:80
+
+secrets:
+  cdek_login:
+    file: ./secrets/cdek_login
+  cdek_pass:
+    file: ./secrets/cdek_pass
